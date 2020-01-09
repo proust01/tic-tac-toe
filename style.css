@@ -1,11 +1,17 @@
 .header {
     width: 60%;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 50px;
     height: 100px;
     border: 1px solid #eaebee;
     text-align: center;
     border-radius: 15px 15px 0 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
+    font-family: 'Varela Round', sans-serif;
 }
 
 img {
@@ -41,7 +47,7 @@ td {
     width:  100px;
     text-align:  center;
     vertical-align:  middle;
-    font-family:  "Comic Sans MS", cursive, sans-serif;
+    font-family: 'Varela Round', sans-serif;
     font-size:  70px;
     cursor: pointer;
 }
@@ -73,11 +79,11 @@ table tr td:last-child {
 .endgame {
   display: none;
   margin: 0 auto;
-  width: 60%;
+  width: 59%;
   height: 266px;
-  top: 202px;
+  top: 239px;
   /* bottom: -266px; */
-  left: 20%;
+  left: 20.5%;
   background-color: #14bdac;
   position: absolute;
   padding-top: 50px;

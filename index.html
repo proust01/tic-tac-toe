@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     
-    <title>Document</title>
+    <title>AI Tic-Tac-Toe</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
   </head>
   <body>
       <!-- <img src="./images/google.jpg" alt="logo"> -->
       <!-- <input type="text"> -->
+      <h1 class="animated bounce delay-5s">AI Tic-Tac-Toe Player</h1>
       <header class="header">
          <span class="box">X : <span class="x-count"></span></span>    <span class="box">O : <span class="y-count"></span></span>
       </header>
         <div class="container">
-            <table>
+            <table class="table animated zoomIn">
                 <tr>
                 <td class="cell" id="0"></td>
                 <td class="cell" id="1"></td>
@@ -34,7 +37,7 @@
             </table>
         </div m>
 
-        <div class="endgame">
+        <div class="endgame animated fadeInDown">
             <div class="text animated infinite flash"></div>
         </div>
         <div class="footer">

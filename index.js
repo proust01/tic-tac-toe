@@ -13,6 +13,7 @@ const winCombos = [
 const cells = document.querySelectorAll('.cell');
 const xCount = document.querySelector('.x-count');
 const yCount = document.querySelector('.y-count');
+const table = document.querySelector('table');
 xCount.innerHTML = 0;
 yCount.innerHTML = 0;
 var numBoard;
@@ -22,7 +23,9 @@ const aiPlayer = 'X';
 startGame();
 
 function startGame() {
-    document.querySelector(".endgame").style.display = "none";
+	document.querySelector(".endgame").style.display = "none";
+	table.classList.add('animated');
+	table.classList.add('zoomIn');
 	numBoard = Array.from(Array(9).keys());
 	cells.forEach(e => e.innerText = "");
     cells.forEach(e => e.addEventListener("click", turnClick, false));
@@ -70,6 +73,9 @@ function gameOver(gameWon) {
 function declareWinner(who) {
 	document.querySelector(".endgame").style.display = "block";
 	document.querySelector(".endgame .text").innerText = who;
+	table.classList.remove('animated');
+	table.classList.remove('zoomIn');
+	console.log(table.classList);
 }
 
 function bestSpot() {

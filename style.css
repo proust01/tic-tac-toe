@@ -91,31 +91,11 @@ table tr td:last-child {
   text-align: center;
   color: white;
   font-size: 2em;
-  /* -webkit-animation: slide 1s forwards;
-  -webkit-animation-delay: 2s;
-  animation: slide 0.5s forwards;
-  animation-delay: 2s */
 }
 
-/* #slide {
-    position: absolute;
-    left: -100px;
-    width: 100px;
-    height: 100px;
-    background: blue;
-    -webkit-animation: slide 0.5s forwards;
-    -webkit-animation-delay: 2s;
-    animation: slide 0.5s forwards;
-    animation-delay: 2s;
-} */
 
-@-webkit-keyframes slide {
-    100% { bottom: 0; }
-}
 
-@keyframes slide {
-    100% { bottom: 0; }
-}
+
 
 .footer {
     width: 60%;
@@ -155,5 +135,11 @@ button {
 
     .footer {
         width: 90%;
+    }
+
+    .endgame {
+        width: 87%;
+        left: 6.5%;
+        top: 221px;
     }
 }

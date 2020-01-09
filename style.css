@@ -133,3 +133,27 @@ button {
     width: 30%;
     border: 1px solid #eaebee;
 }
+
+@media all and (max-width:600px) {
+    hi {
+        margin-top: 20px;
+        font-size: 25px;
+    }
+
+    .box {
+        font-size: 35px;
+    }
+
+    .header {
+        width: 90%;
+        margin-top: 30px;
+    }
+
+    .container {
+        width: 90%;
+    }
+
+    .footer {
+        width: 90%;
+    }
+}

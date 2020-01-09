@@ -1,59 +1,60 @@
-var origBoard;
-const huPlayer = 'O';
-const aiPlayer = 'X';
 const winCombos = [
 	[0, 1, 2],
-	[3, 4, 5],
-	[6, 7, 8],
 	[0, 3, 6],
+	[0, 4, 8],
 	[1, 4, 7],
 	[2, 5, 8],
-	[0, 4, 8],
-	[6, 4, 2]
+	[3, 4, 5],
+	[6, 4, 2],
+	[6, 7, 8]
 ]
+
 
 const cells = document.querySelectorAll('.cell');
 const xCount = document.querySelector('.x-count');
-console.log(xCount);
 const yCount = document.querySelector('.y-count');
 xCount.innerHTML = 0;
 yCount.innerHTML = 0;
+var numBoard;
+const youPlayer = 'O';
+const aiPlayer = 'X';
 
 startGame();
 
 function startGame() {
     document.querySelector(".endgame").style.display = "none";
-	origBoard = Array.from(Array(9).keys());
-	for (var i = 0; i < cells.length; i++) {
-		cells[i].innerText = '';
-		cells[i].style.removeProperty('background-color');
-		cells[i].addEventListener('click', turnClick, false);
-	}
+	numBoard = Array.from(Array(9).keys());
+	cells.forEach(e => e.innerText = "");
+    cells.forEach(e => e.addEventListener("click", turnClick, false));
 }
 
-function turnClick(square) {
-	if (typeof origBoard[square.target.id] == 'number') {
-        turn(square.target.id, huPlayer)
-        
-		if (!checkWin(origBoard, huPlayer) && !checkTie()) {
+function turnClick(event) {
+	console.log("clicked");
+	if (typeof numBoard[event.target.id] == 'number') {
+        turn(event.target.id, youPlayer)
+		if (!checkWin(numBoard, youPlayer) && !checkTie()) {
             return setTimeout(() => turn(bestSpot(), aiPlayer), 1000); 
     }
 }
 }
 
-function turn(squareId, player) {
-	origBoard[squareId] = player;
-	document.getElementById(squareId).innerText = player;
-	let gameWon = checkWin(origBoard, player)
+function turn(id, player) {
+	numBoard[id] = player;
+	console.log(numBoard);
+	document.getElementById(id).innerText = player;
+	let gameWon = checkWin(numBoard, player);
 	if (gameWon) gameOver(gameWon)
 }
 
 function checkWin(board, player) {
-	let plays = board.reduce((a, e, i) => 
-		(e === player) ? a.concat(i) : a, []);
+
+	let myArr = board.reduce((a, c, i) =>  
+		(c === player) ? a.concat(i) : a
+		,[]);
+
 	let gameWon = null;
-	for (let [index, win] of winCombos.entries()) {
-		if (win.every(elem => plays.indexOf(elem) > -1)) {
+	for (let [index, elem] of winCombos.entries()) {
+		if (elem.every(e => myArr.indexOf(e) > -1)) {
 			gameWon = {index: index, player: player};
 			break;
 		}
@@ -62,15 +63,8 @@ function checkWin(board, player) {
 }
 
 function gameOver(gameWon) {
-	for (let index of winCombos[gameWon.index]) {
-		document.getElementById(index).style.backgroundColor =
-			gameWon.player == huPlayer ? "blue" : "red";
-	}
-	for (var i = 0; i < cells.length; i++) {
-		cells[i].removeEventListener('click', turnClick, false);
-	}
-    declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose.");
-    var winCount = gameWon.player == huPlayer ? xCount.innerHTML++ : yCount.innerHTML++
+    var winCount = gameWon.player == youPlayer ? xCount.innerHTML++ : yCount.innerHTML++
+    declareWinner(gameWon.player == youPlayer ? "You win!" : "You lose.");
 }
 
 function declareWinner(who) {
@@ -79,19 +73,15 @@ function declareWinner(who) {
 }
 
 function bestSpot() {
-	return minimax(origBoard, aiPlayer).index;
+	return minimax(numBoard, aiPlayer).index;
 }
 
 function emptySquares() {
-	return origBoard.filter(s => typeof s == 'number');
+	return numBoard.filter(s => typeof s == 'number');
 }
 
 function checkTie() {
 	if (emptySquares().length == 0) {
-		for (var i = 0; i < cells.length; i++) {
-			cells[i].style.backgroundColor = "green";
-			cells[i].removeEventListener('click', turnClick, false);
-		}
 		declareWinner("Tie Game!")
 		return true;
 	}
@@ -101,7 +91,7 @@ function checkTie() {
 function minimax(newBoard, player) {
 	var availSpots = emptySquares();
 
-	if (checkWin(newBoard, huPlayer)) {
+	if (checkWin(newBoard, youPlayer)) {
 		return {score: -10};
 	} else if (checkWin(newBoard, aiPlayer)) {
 		return {score: 10};
@@ -115,7 +105,7 @@ function minimax(newBoard, player) {
 		newBoard[availSpots[i]] = player;
 
 		if (player == aiPlayer) {
-			var result = minimax(newBoard, huPlayer);
+			var result = minimax(newBoard, youPlayer);
 			move.score = result.score;
 		} else {
 			var result = minimax(newBoard, aiPlayer);

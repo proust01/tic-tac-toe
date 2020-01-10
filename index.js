@@ -46,29 +46,30 @@ function turn(id, player) {
 	numBoard[id] = player;
 
 	document.getElementById(id).innerText = player;
-	let gameWon = checkWin(numBoard, player);
-	if (gameWon) gameOver(gameWon)
+	let winner = checkWin(numBoard, player);
+	if (winner) gameOver(winner)
 }
 
 function checkWin(board, player) {
+	let winner = null;
 
-	let myArr = board.reduce((a, c, i) =>  
-		(c === player) ? a.concat(i) : a
+	let myArr = board.reduce((acc, cur, i) =>  
+		(cur === player) ? acc.concat(i) : acc
 		,[]);
 
-	let gameWon = null;
-	for (let [index, elem] of winCombos.entries()) {
+
+	for (let elem of winCombos) {
 		if (elem.every(e => myArr.indexOf(e) > -1)) {
-			gameWon = {index: index, player: player};
-			break;
+			winner = {player: player};
+			
 		}
 	}
-	return gameWon;
+	return winner;
 }
 
-function gameOver(gameWon) {
-    var winCount = gameWon.player == youPlayer ? xCount.innerHTML++ : yCount.innerHTML++
-    declareWinner(gameWon.player == youPlayer ? "You win!" : "You lose.");
+function gameOver(winner) {
+    var winCount = winner.player == youPlayer ? xCount.innerHTML++ : yCount.innerHTML++
+    declareWinner(winner.player == youPlayer ? "You win!" : "You lose.");
 }
 
 function declareWinner(who) {
@@ -206,3 +207,9 @@ function minimax(newBoard, player) {
 	return moves[bestMove];
 
 }
+
+
+
+
+
+

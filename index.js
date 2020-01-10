@@ -151,8 +151,6 @@ var count = 0;
 
 function minimax(newBoard, player) {
 	var availSpots = emptySquares();
-	count++;
-	console.log(count);
 
 
 	if (checkWin(newBoard, youPlayer)) {
@@ -205,7 +203,6 @@ function minimax(newBoard, player) {
 			}
 		}
 	}
-	console.log(moves);
 	return moves[bestMove];
 
 }
